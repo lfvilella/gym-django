@@ -1,0 +1,70 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Oswald', sans-serif;
+}
+ul{
+    list-style: none;
+}
+
+/* ************** */
+header{
+    background-color:white;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 15px;
+    color: #000;
+    padding: 20px 20px 10px;
+    border-style: solid;
+    border-bottom-width: 4px;
+    border-top-width: 0;
+    border-right-width: 4px;
+    border-left-width: 4px;
+    border-color: #0834c5;
+}
+header ul{
+    font-size: 16px;
+}
+header li{
+    text-align: center;
+}
+header li:first-child{
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+header ul.aerobicos li:first-child{
+    padding-top: 15px;
+    border-style: solid;
+    border-bottom-width: 0;
+    border-top-width: 3px;
+    border-right-width: 0;
+    border-left-width: 0;
+    border-color: #000;
+}
+/* ************** */
+
+#top{
+    background-image: url('img/gym-header.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: static;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: #000;
+    padding: 20px 0px 20px;
+}
+#top h3.title{
+    color: white;
+    font-size: 50px;
+}
+#top h3{
+    margin-left: -950px;
+    color: white;
+    text-align: center;
+}

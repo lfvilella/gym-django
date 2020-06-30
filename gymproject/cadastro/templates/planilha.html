@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Planilha Gym</title>
+    <link rel="shortcut icon" type="image/ico" href="/static/img/icon-gym.png">
+    <link href="https://fonts.googleapis.com/css?family=Oswald|Raleway&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <link rel="stylesheet" href="/static/styles_planilha.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <header>
+        <ul class="musculacao">
+            <li>Musculação:</li>
+            {% for dia, treino in agrupador_periodizacao %}
+                {% for tipo_treino in treino %}
+                    <li>{{ dia }} - {{ tipo_treino.musculacao }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+        <ul class="aerobicos">
+            <li>Aeróbicos:</li>
+            {% for dia, treino in agrupador_periodizacao %}
+                {% for tipo_treino in treino %}
+                    <li>{{ dia }} - {{ tipo_treino.aerobico }}min</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </header>
+    <div id="top">
+        <h3 class="title">Planilha de Treino</h3> 
+        <h3>{{ data_planilha }} <br> Aluno: {{ username }}</h3>
+    </div>
+    <!-- ************************** -->
+    <table class="table">
+        {% for treino, lista_exercicios in agrupador %}
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">TREINO</th>
+                    <th scope="col">MUSCULATURA</th>
+                    <th scope="col">EXERCICIO</th>
+                    <th scope="col">S | R</th>
+                    <th scope="col">TECNICA AVANCADA</th>
+                </tr>
+            </thead>
+            {% for exercicio in lista_exercicios %}
+                <tbody>
+                    <tr>
+                        <td>{{ treino }}</td>
+                        <td>{{ exercicio.musculatura }}</td>
+                        <td>{{ exercicio.exercicio }}</td>
+                        <td>{{ exercicio.series }} | {{ exercicio.repeticao }}</td>
+                        <td>{{ exercicio.tecnica }}</td>
+                    </tr>
+                </tbody>
+            {% endfor %}
+        {% endfor %}
+    </table>
+    <br>
+</body>
+</html>

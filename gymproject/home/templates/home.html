@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home - Gym Project</title>
+    <link rel="shortcut icon" type="image/ico" href="/static/img/icon-gym.png">
+    <link href="https://fonts.googleapis.com/css?family=Oswald|Raleway&display=swap" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+    <style>
+
+    </style>
+</head>
+<body id="top">
+    <header>
+        <h2><a href="#" target="_blank"><img src="/static/img/logoacademia.png" alt=""></a></h2>
+        <nav>
+            <ul>
+                <li><a href="#top">Top</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#table">Plans</a></li>
+                <li><a href="#teachers">Teachers</a></li>
+                <li><a href="#contact">Location</a></li>
+                <li><a href="#social-media">Medias</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- ************************************************************ -->
+    <div id="hero">
+            <div class="background-image"></div>
+            <h1>Workout in Gym Project</h1>
+            <h3>Gym Where You Find Your Best Body</h3>
+            <!-- <a href="/admin" class="btn" target="_blank">Login Admin</a> -->
+            {% if user.is_authenticated %}
+                <a>Hi {{ user.username }}!</p>
+                <a href="{% url 'logout' %}" class="btn">logout</a>
+                <br>
+                <a href="/treino" class="btn">Planilha Treino</a>
+                {% else %}
+                <p>You are not logged in.</p>
+                <a href="{% url 'login' %}" class="btn">login</a>
+                <br>
+                <a href="{% url 'signup' %}" class="btn">signup</a>
+            {% endif %}
+        </div>
+    </div>
+    <!-- ************************************************************ -->
+    <div id="about">
+        <h3 class="title">About Gym Project</h3>
+        <div id="two-cols">
+            <div class="about-img"><img src="static/img/about-img.jpg" alt="thumbs up"></div>
+            <div class="about-bio">
+                <p>
+                    O &ldquo;Gym Project&rdquo; é um projeto para testar as skils de desenvolvimento web.
+                    Onde simula uma situação real, simples no caso deste sistema, mas com o intuito de apenas
+                    treinar/praticar e aprender conteudo.
+                    <br>
+                    O sistema simula uma aplicação real de uma academia, onde nele pode efetuar cadastro de alunos
+                    nas diversas modalidades que a academia proporciona. Por fim, o sistema automatiza a cobrança
+                    mensal dos alunos, sendo assim todo dia primeiro do cada mês, se o aluno não tiver pago ele gera
+                    uma cobrança. E para facilitar o administrador, na aba Pagamentos tem o campo 'phone_number' onde
+                    só basta clicar nele que é redirecionado para o whatsapp na conversa do aluno.
+                </p>
+            </div>
+            <p>&nbsp;</p>
+        </div>
+        <hr>
+    </div>
+    <!-- ************************************************************ -->
+    <div id="gallery">
+        <h3 class="title">Gallery</h3>
+        <p>
+            In the gym we have sections like a swimming pool, bodybuilding area, fight area, etc...<br>
+            Look at some sections of the Gym:
+        </p>
+        <hr>
+        <ul class="grid">
+            <li style="background-image: url('/static/img/poolgym.jpg');"></li>
+            <li style="background-image: url('/static/img/workoutarea.jpg');"></li>
+            <li style="background-image: url('/static/img/fightarea.jpg');"></li>
+            <li style="background-image: url('/static/img/sauna.jpg');"></li>
+        </ul>
+        <hr>
+    </div>
+    <!-- ************************************************************ -->
+    <div id="table">
+        <h3 class="title">Plans</h3>
+        <p>NA ACADEMIA TEMOS VARIOS PLANOS - MUDAR ESSA PARTE</p>
+        <hr>
+        
+        <h1>Monthly</h1>
+        <ul class="cost-month">
+            <li>Musculação - R$60,00</li>
+            <li>Karatê - R$50,00</li>
+            <li>Muay Thai - R$50,00</li>
+            <li>Natação - R$80,00</li>
+            <li>Circuito - R$100,00</li>
+        </ul>
+        <br>
+        <h1>Bonus Monthly</h1>
+        <ul class="cost-double-plans">
+            <li>Karatê + Muay Thai - R$90,00</li>
+            <li>Musculação + Karatê / Muay Thai - R$100,00</li>
+            <li>Musculação + Natação - R$120,00</sli>
+            <li>Musculação + Circuito - R$140,00</li>
+        </ul>
+        <br>
+        <h1>6 Months</h1>
+        <ul class="six-months">
+            <li>Musculação - R$60,00</li>
+            <li>Karatê - R$50,00</li>
+            <li>Muay Thai - R$50,00</li>
+            <li>Natação - R$80,00</li>
+            <li>Circuito - R$100,00</li>
+        </ul>
+        <br>
+        <h1>Yearly</h1>
+        <ul class="yearly">
+            <li>Musculação - R$60,00</li>
+            <li>Karatê - R$50,00</li>
+            <li>Muay Thai - R$50,00</li>
+            <li>Natação - R$80,00</li>
+            <li>Circuito - R$100,00</li>
+        </ul>
+        <br>
+    </div>
+    <hr>
+    <!-- ************************************************************ -->
+    <div id="teachers">
+        <h3 class="title">Teachers</h3>
+        <p class="portrait"><img src="/static/img/teacher1.jpg" alt="Fernando Sardinha" class="teacher-photos"></p>
+        <p class="author">&mdash; Fernando Sardinha</p>
+        <p class="description-author">Mais conhecido como o <strong>MESTRE</strong>, devido aos seus anos de treinamento, foi o criador
+            da metolodiga &ldquo;Ponto Zero&rdquo; e se consagra atualmente como um atleta Pro na categoria Open Master. É formado na USP
+            em filosia do exercicio.
+        </p>
+        <p class="portrait"><img src="/static/img/teacher2.jpg" alt="Rubens Gomes" class="teacher-photos"></p>
+        <p class="author">&mdash; Rubens Gomes</p>
+        <p class="description-author">Mais conhecido como o <strong>COACH</strong>, devido aos seus anos de experiencia com o bodybuilder,
+            foi o criador do Team Overall, e se consagra atualmente como um coach vitoriso. É formado na PUC-RJ em metodologia do exercicio.
+        </p>
+        <p class="portrait"><img src="/static/img/teacher3.jpg" alt="Lucas Pinheiro" class="teacher-photos"></p>
+        <p class="author">&mdash; Lucas Pinheiro</p>
+        <p class="description-author">Lucas é um atleta profissional e com varios vitorias consecutivas, que sao decorrentes do seu trabalho
+            duro e esforço. Atualmente como um atleta Pro está em busca do Olimpia. É formado nos USA em fisionomia do exercicio.
+        </p>
+    </div>
+    <hr>
+    <!-- ************************************************************ -->
+    <div id="contact">
+        <h3 class="title">Gym Location</h3>
+        <section class="flexbox-section">
+            <p>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1103.6500074231628!2d-49.51831150936605!3d-23.391624698786288!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c1a53802e24e81%3A0x976d823c17855bb!2sR.+Max%C3%ADmiano+de+Andrade%2C+1097-891+-+Pinheirinho%2C+Fartura+-+SP%2C+18870-000!5e1!3m2!1spt-BR!2sbr!4v1566145875158!5m2!1spt-BR!2sbr" width="350" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </p>
+            <p>
+                Av. Maximiano de Andrade<br>
+                Fartura/SP - 18870-000<br>
+                Brazil
+            </p>
+        </section>
+
+    </div>
+    <!-- ************************************************************ -->
+    <footer id="social-media">
+        <ul>
+            <li><a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter-square"></i></a></li>
+            <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
+            <li><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+        </ul>
+        <p>&copy; <script>document.write(new Date().getFullYear());</script> This is My Project of Gym, not your !</p>
+        <p>&ldquo;Welcome to my Gym Project !&rdquo; &mdash; Luis Felipe F. Vilella</p>
+    </footer>
+    <script type="text/javascript">
+        $(document).ready(function() {
+          $('a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+      
+            var target = this.hash;
+            var $target = $(target);
+      
+            $('html, body').stop().animate({
+              'scrollTop': $target.offset().top - 100
+            }, 900, 'swing', function() {
+              window.location.hash = target - 100;
+            });
+          });
+        });
+    </script>
+</body>
+</html>
