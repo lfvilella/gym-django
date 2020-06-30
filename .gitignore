@@ -1,0 +1,15 @@
+*.idea
+*.sqlite3
+**/**/.DS_Store
+media
+.env
+**/**/*.db
+
+**/**/celerybeat-schedule
+**/**/celerybeat.pid
+
+# Arquivos Compilados Pyc:
+**/**/*.py[cod]
+**/__pycache__
+
+.env
