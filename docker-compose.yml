@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+
+  app:
+    build: gymproject
+    ports:
+      - "${BACKEND_HOST_PORT}8000"
+    volumes:
+      - .:/deploy
+    working_dir: /deploy/gymproject
+    stdin_open: true
+    tty: true
+    command: ${RUNSERVER:-/bin/bash}
+    networks:
+        - nginx-gateway
+    restart: ${DOCKER_RESTART:-no}
+    environment:
+        VIRTUAL_HOST: gym-proj.lfvilella.com
+        VIRTUAL_HOST_ALIAS: gym-proj.lfvilella.com,www.gym-proj.lfvilella.com
+        LETSENCRYPT_HOST: gym-proj.lfvilella.com,www.gym-proj.lfvilella.com
+        LETSENCRYPT_EMAIL: vilella.luisfelipe+gym-proj.lfvilella.com@gmail.com
+
+networks:
+  nginx-gateway:
+    external:
+        name: nginx-gateway

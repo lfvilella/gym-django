@@ -1,11 +1,8 @@
 -include .env
 
-IMAGE = gym-project:latest
-CONTAINER = gym-project
-MANAGECMD = docker exec -it $(CONTAINER)
-APP_LOCATION = "$(PWD)/gymproject"
-DOCKERFILE = "$(PWD)/dev.Dockerfile"
-HOST_PORT = $(if $(CUSTOM_HOST_PORT),$(CUSTOM_HOST_PORT),8000)
+ENV_FILE_TEMPLATE = "$(PWD)/.env.template"
+ENV_FILE = "$(PWD)/.env"
+
 
 all:
 	@echo "Hello $(LOGNAME), nothing to do by default"
@@ -15,37 +12,39 @@ help: ## This help.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
 build: delete-container ## Build the container
-	@docker build --tag $(IMAGE) -f $(DOCKERFILE) $(APP_LOCATION)
-	@docker run -dit --name $(CONTAINER) -v $(APP_LOCATION):/deploy -p $(HOST_PORT):8000 -w /deploy $(IMAGE) /bin/bash
+	@docker-compose build
+	@docker-compose up -d
+ 
+db: ## Create the DataBase
+	@docker-compose exec -u postgres db psql -c 'CREATE DATABASE rest_db ENCODING 'UTF8' TEMPLATE template0;'
 
 test: start ## Run tests
-	@$(MANAGECMD) $(DJANGO_MANAGER) test
+	@docker-compose exec app ./manage.py test
 
 restart: ## Restart the container
-	@docker restart $(CONTAINER)
+	@docker-compose restart app
 
 cmd: start ## Access bash
-	@$(MANAGECMD) /bin/bash
+	@docker-compose exec app /bin/bash
 
-up: start ## Start django server
-	@$(MANAGECMD) /bin/bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+shell: start ## Access django shell
+	@docker-compose exec app /bin/bash -c "./manage.py shell"
+
+up: start ## Start django dev server
+	@docker-compose exec app /bin/bash -c "./manage.py migrate && ./manage.py runserver 0.0.0.0:8000"
 
 run-celery: start ## Start processing celery queue
-	@$(MANAGECMD) /bin/bash -c "celery -A gymproject.celery worker --loglevel=info -B"
+	@docker-compose exec app /bin/bash -c "celery -A gymproject.celery worker --loglevel=info -B"
 
-start: clean
-	@docker start $(CONTAINER)
+start:
+	@docker-compose start
 
 down: ## Stop container
-	@docker stop $(CONTAINER) || true
+	@docker-compose stop || true
 
 delete-container: down
-	@docker rm $(CONTAINER) || true
+	@docker-compose down || true
 
 remove: delete-container ## Delete containers and images
-	@docker rmi $(IMAGE)
-
-clean: ## Deletes old *.py[co] files
-	@find . -name "*.py[co]" -delete
 
 .DEFAULT_GOAL := help
